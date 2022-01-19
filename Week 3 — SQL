@@ -34,3 +34,6 @@ VALUES (1, Corporate, 100);
 UPDATE Employee
 SET branch_id = 1
 WHERE emp_id = 100;
+
+INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
+VALUES (101, Jan, Levinson, 1961-05-11, 110000, 100, 1);
