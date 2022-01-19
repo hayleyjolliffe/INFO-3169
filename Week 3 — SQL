@@ -27,3 +27,6 @@ ADD FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE SET NULL;
 
 INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
 VALUES (100, David, Wallace, 1967-11-17, 250000, NULL, NULL);
+
+INSERT INTO Branch(branch_id, branch_name, mgr_id)
+VALUES (1, Corporate, 100);
