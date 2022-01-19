@@ -43,3 +43,5 @@ VALUES (102, Michael, Scott, 1964-03-15, 75000, 100, NULL);
 
 INSERT INTO Branch(branch_id, branch_name, mgr_id)
 VALUES (2, Scranton, 102);
+
+DELETE FROM Employee WHERE emp_id = 102;
