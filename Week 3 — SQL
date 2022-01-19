@@ -37,3 +37,6 @@ WHERE emp_id = 100;
 
 INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
 VALUES (101, Jan, Levinson, 1961-05-11, 110000, 100, 1);
+
+INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
+VALUES (102, Michael, Scott, 1964-03-15, 75000, 100, NULL);
