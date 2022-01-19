@@ -24,3 +24,6 @@ ALTER COLUMN manager_id INT FOREIGN KEY REFERENCES Employee(emp_id) ON DELETE SE
 
 ALTER TABLE Employee
 ADD FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE SET NULL;
+
+INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
+VALUES (100, David, Wallace, 1967-11-17, 250000, NULL, NULL);
