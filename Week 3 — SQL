@@ -1,3 +1,12 @@
+/*
+
+	INFO-3169 | Week 3
+	Hayley Jolliffe
+	[REDACTED]
+
+*/
+
+-- STEP 1
 CREATE TABLE IF NOT EXISTS Employee (
 	emp_id INT AUTO_INCREMENT NOT NULL,
 	first_name VARCHAR(45) NOT NULL,
@@ -9,6 +18,7 @@ CREATE TABLE IF NOT EXISTS Employee (
 	PRIMARY KEY (emp_id)
 );
 
+-- STEP 2
 CREATE TABLE IF NOT EXISTS Branch (
 	branch_id INT AUTO_INCREMENT NOT NULL,
 	branch_name VARCHAR(255) UNIQUE NOT NULL,
@@ -16,32 +26,41 @@ CREATE TABLE IF NOT EXISTS Branch (
 	PRIMARY KEY (branch_id)
 );
 
+-- STEP 3 - 1
 ALTER TABLE Employee
 ALTER COLUMN branch_id INT FOREIGN KEY REFERENCES Branch(branch_id) ON DELETE SET NULL;
 
+-- STEP 4
 ALTER TABLE Employee
 ALTER COLUMN manager_id INT FOREIGN KEY REFERENCES Employee(emp_id) ON DELETE SET NULL;
 
+-- STEP 3 - 2
 ALTER TABLE Employee
 ADD FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE SET NULL;
 
+-- STEP 5
 INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
 VALUES (100, David, Wallace, 1967-11-17, 250000, NULL, NULL);
 
+-- STEP 6
 INSERT INTO Branch(branch_id, branch_name, mgr_id)
 VALUES (1, Corporate, 100);
 
+-- STEP 7
 UPDATE Employee
 SET branch_id = 1
 WHERE emp_id = 100;
 
+-- STEP 8
 INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
 VALUES (101, Jan, Levinson, 1961-05-11, 110000, 100, 1);
 
 INSERT INTO Employee(emp_id, first_name, last_name, birth_day, salary, manager_id, branch_id)
 VALUES (102, Michael, Scott, 1964-03-15, 75000, 100, NULL);
 
+-- STEP 9
 INSERT INTO Branch(branch_id, branch_name, mgr_id)
 VALUES (2, Scranton, 102);
 
+-- STEP 10
 DELETE FROM Employee WHERE emp_id = 102;
