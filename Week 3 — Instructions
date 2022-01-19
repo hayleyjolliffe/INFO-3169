@@ -1,0 +1,51 @@
+database/schema: employee
+
+1. create tables:
+employee - columns
+
+emp_id
+first_name
+last_name
+birth_day
+salary
+manager_id
+branch_id
+
+
+2. branch table:
+columns -
+branch_id,
+branch_name,
+mgr_id
+
+
+mgr_id in branch table is a foreign key of emp_id in employee table (ON DELETE SET NULL)
+FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+
+3. alter employee table and make branch_id a foreign key of branch_id in branch table. 
+	ON DELETE SET NULL
+4. alter employee table make manager_id a foreign key of emp_id in employee table
+	ON DELETE SET NULL
+
+3. answer
+ALTER TABLE employee
+ADD FOREIGN KEY (branch_id) REFRENCES branch (branch_id) ON DELETE SET NULL;
+
+5. insert row into employee
+100, David, Wallace, 1967-11-17, 250000, NULL, NULL
+
+6. insert into branch
+1, Corporate, 100
+
+7.
+update employee table set branch_id = 1 for emp_id 100
+
+8. insert into employee
+101, Jan, Levinson, 1961-05-11, 110000 100, 1
+102 Michael Scott 1964-03-15, 75000, 100, NULL
+
+9. insert into branch
+2, Scranton, 102
+
+10. delete recored from employee where emp_id is 102
+	show the output of employee table and branch table
