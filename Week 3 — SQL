@@ -30,3 +30,7 @@ VALUES (100, David, Wallace, 1967-11-17, 250000, NULL, NULL);
 
 INSERT INTO Branch(branch_id, branch_name, mgr_id)
 VALUES (1, Corporate, 100);
+
+UPDATE Employee
+SET branch_id = 1
+WHERE emp_id = 100;
