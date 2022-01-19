@@ -1,1 +1,17 @@
+CREATE TABLE IF NOT EXISTS Employee (
+	emp_id INT AUTO_INCREMENT NOT NULL,
+	first_name VARCHAR(45) NOT NULL,
+	last_name VARCHAR(45) NOT NULL,
+	birth_day DATETIME NOT NULL,
+	salary INT NOT NULL,
+	mgr_id ,
+	branch_id INT NOT NULL,
+	PRIMARY KEY (emp_id)
+);
 
+CREATE TABLE IF NOT EXISTS Branch (
+	branch_id INT AUTO_INCREMENT NOT NULL,
+	branch_name VARCHAR(255) UNIQUE NOT NULL,
+	mgr_id INT UNIQUE NOT NULL,
+	PRIMARY KEY (branch_id)
+);
