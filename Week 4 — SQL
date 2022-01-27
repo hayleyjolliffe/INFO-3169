@@ -1,0 +1,89 @@
+--
+-- INFO-3169 WEEK 4
+-- Hayley Jolliffe — h_jolliffe128179
+--
+
+--
+-- STEP 1: Download & run 'HR' SQL script
+--
+
+--
+-- STEP 2: Write a SQL statement for the following queries:
+-- A: Write a query to find the addresses (location_id, street_address, city,
+-- state_province, country_name) of all departments.
+-- 
+-- B: Write a query to find the name (first_name, last_name), department ID,
+-- and name of all employees.
+--
+-- C: Write a query to find the name (first_name, last_name), job, department ID,
+-- and name of all employees who work in London.
+--
+-- D: Write a query to find the employee ID, name (last_name), along with their
+-- manager's ID and name (last_name).
+--
+-- E: Write a query to find the name (first_name, last_name) and hire date of all
+-- employees who were hired after 'Jones'.
+--
+-- F: Write a query to find the employee ID, job title, number of days between 
+-- starting and ending dates for all jobs in Department 90.
+-- 
+-- G: Write a query to display the department name, ID, and manager's first name.
+-- 
+-- H: Write a query to display the department name, manager's name, and city.
+--
+-- I: Write a query to display job title, employee name, and the difference
+-- between an employee's salary, and minimum salary for the job.
+-- 
+-- J: Write a query to display the job history of all employees currently making
+-- a salary of more than $10K.
+--
+
+--
+-- 2A
+--
+
+
+--
+-- 2B
+--
+
+
+--
+-- 2C
+--
+
+
+--
+-- 2D
+--
+
+
+--
+-- 2E
+--
+
+
+--
+-- 2F
+--
+
+
+--
+-- 2G
+--
+
+
+--
+-- 2H
+--
+
+
+
+--
+-- 2I
+--
+
+
+--
+-- 2J
+--
