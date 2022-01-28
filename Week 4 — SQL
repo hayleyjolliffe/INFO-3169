@@ -79,14 +79,16 @@ WHERE department_id='90';
 --
 -- 2G
 --
-SELECT department_name, department_id, last_name
-WHERE department_id=manager
+SELECT departments.department_name, departments.department_id, employees.last_name
+FROM department
+INNER JOIN employees ON department.last_name=employees.last_name;
 
 --
 -- 2H
 --
-
-
+SELECT name, city
+FROM departments
+WHERE CONTAINS("MAN");
 
 --
 -- 2I
