@@ -15,9 +15,9 @@
 -- B: Write a query to find the name (first_name, last_name), department ID,
 -- and name of all employees.
 --
--- C: Write a query to find the name (first_name, last_name), job, department ID,
--- and name of all employees who work in London.
---
+-- C: Write a query to find the name (first_name, last_name), job, and department
+-- ID of all employees who work in London.
+-- 
 -- D: Write a query to find the employee ID, name (last_name), along with their
 -- manager's ID and name (last_name).
 --
@@ -41,17 +41,18 @@
 --
 -- 2A
 --
-
+SELECT location_id, street_address, city, state_province, country_name FROM `departments`;
 
 --
 -- 2B
 --
-
+SELECT first_name, last_name, department_id FROM `employees`;
 
 --
 -- 2C
 --
-
+SELECT first_name, last_name, job, department_id FROM `employees`
+WHERE location = "London";
 
 --
 -- 2D
