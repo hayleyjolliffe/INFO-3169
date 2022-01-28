@@ -64,7 +64,10 @@ FROM `employees`;
 --
 -- 2E
 --
-
+SELECT DISTINCT first_name, last_name, hire_date
+FROM `employees`
+WHERE hire_date = CONVERT(...,1987-09-20)
+ORDER BY hire_date ASC;
 
 --
 -- 2F
