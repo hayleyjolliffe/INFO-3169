@@ -72,12 +72,15 @@ ORDER BY hire_date ASC;
 --
 -- 2F
 --
-
+SELECT employee_id, job_id, hire_date
+FROM `employees`
+WHERE department_id='90';
 
 --
 -- 2G
 --
-
+SELECT department_name, department_id, last_name
+WHERE department_id=manager
 
 --
 -- 2H
