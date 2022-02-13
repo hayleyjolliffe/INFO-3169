@@ -1,0 +1,42 @@
+-- WEEK 6
+
+-- Step 1
+-- Finding full name and salary of all employees making more than 'Bull'
+-- RETURNS 63 RECORDS
+
+-- Step 2
+-- Finding full name of employees working in IT
+-- RETURNS 5 RECORDS
+
+-- Step 3
+-- Finding full name of employees with a US-based manager
+-- RETURNS 75 RECORDS
+
+-- Step 4
+-- Finding full names of all managers
+-- RETURNS 18 RECORDS
+
+-- Step 5
+-- Finding full name and salary of all employees making their job grade's minimum
+-- RETURNS 3 RECORDS
+
+-- Step 6
+-- Finding full name and salary of all employees earning more than 'Bell'
+-- RETURNS 64 RECORDS
+
+-- Step 7
+-- Finding full name and salary of all employees earning more than the shipping clerk
+-- Sort salary lowest to highest
+-- RETURNS 61 RECORDS
+
+-- Step 8
+-- Select the last 10 records from employees in ascending order
+-- RETURNS 10 RECORDS
+
+-- Step 9
+-- Finding name and ID of all departments where nobody is working
+-- RETURNS 16 RECORDS
+
+-- Step 10
+-- Finding full name and salary of all employees making more than the average salary
+-- RETURNS 51 RECORDS
