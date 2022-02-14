@@ -3,43 +3,77 @@
 -- Step 1
 -- Finding full name and salary of all employees making more than 'Bull'
 -- RETURNS 63 RECORDS
-SELECT first_name, last_name, salary
+SELECT FIRST_NAME, LAST_NAME, SALARY
 FROM employees
-WHERE salary > (SELECT salary FROM employees WHERE last_name = 'Bull');
+WHERE SALARY > (SELECT SALARY FROM employees WHERE LAST_NAME = 'Bull');
 
 -- Step 2
 -- Finding full name of employees working in IT
 -- RETURNS 5 RECORDS
+SELECT FIRST_NAME, LAST_NAME
+FROM employees
+WHERE DEPARTMENT_ID = 60;
 
 -- Step 3
 -- Finding full name of employees with a US-based manager
 -- RETURNS 75 RECORDS
+SELECT FIRST_NAME, LAST_NAME
+FROM employees 
+WHERE MANAGER_ID IN (SELECT EMPLOYEE_ID 
+FROM employees WHERE DEPARTMENT_ID 
+IN (SELECT DEPARTMENT_ID FROM departments WHERE LOCATION_ID 
+IN (SELECT LOCATION_ID FROM locations WHERE COUNTRY_ID='US')));
 
 -- Step 4
 -- Finding full names of all managers
 -- RETURNS 18 RECORDS
+SELECT FIRST_NAME, LAST_NAME
+FROM employees
+WHERE JOB_ID LIKE '%_MAN%'
+OR JOB_ID LIKE '%_MGR%';
 
 -- Step 5
 -- Finding full name and salary of all employees making their job grade's minimum
 -- RETURNS 3 RECORDS
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM employees
+WHERE SALARY IN 
 
 -- Step 6
--- Finding full name and salary of all employees earning more than 'Bell'
+-- Finding full name and salary of all employees making more than 'Bell'
 -- RETURNS 64 RECORDS
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM employees
+WHERE SALARY > (SELECT SALARY FROM employees WHERE LAST_NAME = 'Bell');
 
 -- Step 7
 -- Finding full name and salary of all employees earning more than the shipping clerk
 -- Sort salary lowest to highest
 -- RETURNS 61 RECORDS
+SELECT FIRST_NAME, LAST_NAME, JOB_ID, SALARY
+FROM employees
+WHERE SALARY > ALL (SELECT SALARY
+FROM EMPLOYEES
+WHERE JOB_ID = 'SH_CLERK')
+ORDER BY SALARY ASC;
 
 -- Step 8
 -- Select the last 10 records from employees in ascending order
 -- RETURNS 10 RECORDS
+(SELECT * FROM employees
+ORDER BY EMPLOYEE_ID DESC LIMIT 10)
+ORDER BY EMPLOYEE_ID ASC;
 
 -- Step 9
 -- Finding name and ID of all departments where nobody is working
 -- RETURNS 16 RECORDS
+SELECT DEPARTMENT_NAME, DEPARTMENT_ID
+FROM departments
+WHERE employees = null;
 
 -- Step 10
 -- Finding full name and salary of all employees making more than the average salary
 -- RETURNS 51 RECORDS
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM employees
+WHERE SALARY > (AVG(SALARY));
