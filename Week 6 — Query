@@ -29,15 +29,17 @@ IN (SELECT LOCATION_ID FROM locations WHERE COUNTRY_ID='US')));
 -- RETURNS 18 RECORDS
 SELECT FIRST_NAME, LAST_NAME
 FROM employees
-WHERE JOB_ID LIKE '%_MAN%'
-OR JOB_ID LIKE '%_MGR%';
+WHERE EMPLOYEE_ID IN (SELECT MANAGER_ID
+FROM employees);
 
 -- Step 5
 -- Finding full name and salary of all employees making their job grade's minimum
 -- RETURNS 3 RECORDS
 SELECT FIRST_NAME, LAST_NAME, SALARY
 FROM employees
-WHERE SALARY IN 
+WHERE JOB_ID IN (SELECT JOB_ID
+FROM jobs
+WHERE MIN_SALARY = SALARY);
 
 -- Step 6
 -- Finding full name and salary of all employees making more than 'Bell'
@@ -69,11 +71,13 @@ ORDER BY EMPLOYEE_ID ASC;
 -- RETURNS 16 RECORDS
 SELECT DEPARTMENT_NAME, DEPARTMENT_ID
 FROM departments
-WHERE employees = null;
+WHERE DEPARTMENT_ID NOT IN(SELECT DEPARTMENT_ID
+FROM employees);
 
 -- Step 10
 -- Finding full name and salary of all employees making more than the average salary
 -- RETURNS 51 RECORDS
 SELECT FIRST_NAME, LAST_NAME, SALARY
 FROM employees
-WHERE SALARY > (AVG(SALARY));
+WHERE SALARY > (SELECT AVG(SALARY)
+FROM employees);
