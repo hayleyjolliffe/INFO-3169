@@ -3,6 +3,9 @@
 -- Step 1
 -- Finding full name and salary of all employees making more than 'Bull'
 -- RETURNS 63 RECORDS
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > (SELECT salary FROM employees WHERE last_name = 'Bull');
 
 -- Step 2
 -- Finding full name of employees working in IT
