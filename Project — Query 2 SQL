@@ -1,0 +1,37 @@
+-- QUERY 2
+
+-- Step 1
+-- Finding patient 752663830-x's name
+-- RETURNS 1 RECORD
+
+-- Step 2
+-- Selecting all 'reserve' changes from users in San Francisco
+-- RETURNS 371 RECORDS
+
+-- Step 3
+-- Finding reserve amounts higher than Reserve 588785
+-- RETURNS 409 RECORDS
+
+-- Step 4
+-- Finding second highest reserve amount
+-- RETURNS 1 RECORD
+
+-- Step 5
+-- Return all claims initially 'unassigned'
+-- RETURNS 100 RECORDS
+
+-- Step 6
+-- Returning all closed claimants' full name and closed date
+-- RETURNS 66 RECORDS
+
+-- Step 7
+-- Returning all claims created and updated by the same user
+-- RETURNS 22 RECORDS
+
+-- Step 8
+-- Finding claimants that haven't been reopened
+-- RETURNS 70 RECORDS
+
+-- Step 9
+-- Returning all published claims
+-- RETURNS 302 RECORDS
