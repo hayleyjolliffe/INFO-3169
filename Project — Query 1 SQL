@@ -31,3 +31,24 @@ WHERE EnteredBy LIKE '%rkailyn%'
 AND EntryDate LIKE '%2016%'
 OR EnteredBy LIKE '%rkailyn%'
 AND EntryDate LIKE '%2017%';
+
+-- Step 5
+-- Categorizing claimants by descriptions as 'Claimant Category'
+SELECT ClaimantTypeID,
+CASE
+    WHEN ClaimantTypeID = 1 THEN 'First Aid'
+    WHEN ClaimantTypeID = 2 THEN 'Indemnity'
+    WHEN ClaimantTypeID = 3 THEN 'Medical Only'
+    WHEN ClaimantTypeID = 4 THEN 'Pending'
+    WHEN ClaimantTypeID = 5 THEN 'Duplicate'
+    WHEN ClaimantTypeID = 6 THEN 'No Coverage'
+    WHEN ClaimantTypeID = 7 THEN 'Coverage B- Employer Liability'
+    WHEN ClaimantTypeID = 8 THEN 'No coverage/litigated'
+    WHEN ClaimantTypeID = 9 THEN 'Incident/Report Only'
+    WHEN ClaimantTypeID = 10 THEN 'Duplicate Pending'
+    WHEN ClaimantTypeID = 11 THEN 'General Liability'
+    WHEN ClaimantTypeID = 12 THEN 'Property'
+    WHEN ClaimantTypeID = 13 THEN 'Commercial Auto'
+END AS ClaimantTypeID
+FROM claimant
+ORDER BY ClaimantTypeID ASC;
