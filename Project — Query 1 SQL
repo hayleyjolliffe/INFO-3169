@@ -52,3 +52,10 @@ CASE
 END AS ClaimantTypeID
 FROM claimant
 ORDER BY ClaimantTypeID ASC;
+
+-- Step 6
+-- Returning all open claimants with status desc
+-- RETURNS 34 RECORDS
+SELECT * FROM claimant
+INNER JOIN claimstatus ON claimant.claimStatusID = claimstatus.ClaimStatusID
+WHERE claimant.claimStatusID = 1;
