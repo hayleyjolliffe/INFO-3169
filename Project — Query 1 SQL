@@ -13,3 +13,12 @@ AND EnteredBy LIKE '%lnikki%';
 SELECT * FROM reservetype 
 WHERE ReserveTypeDesc LIKE '%Medical%'
 OR ParentID = 0;
+
+-- Step 3
+-- Returning ClaimantID, ClaimantTypeID from Claimant
+-- and ClaimantTypeDesc from ClaimantType where type is 'General Liability'
+-- RETURNS 9 RECORDS
+SELECT claimant.ClaimantID, claimant.ClaimantTypeID, claimanttype.ClaimantTypeDesc
+FROM claimant
+INNER JOIN claimanttype ON claimant.ClaimantTypeID = claimanttype.ClaimantTypeID
+WHERE claimant.ClaimantTypeID = 11;
