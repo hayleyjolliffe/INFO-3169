@@ -3,6 +3,10 @@
 -- Step 1
 -- Finding patient 752663830-x's name
 -- RETURNS 1 RECORD
+SELECT patient.FirstName, patient.LastName
+FROM patient
+INNER JOIN claimant ON patient.PatientID = claimant.PatientID
+WHERE claimant.ClaimID = (SELECT ClaimID FROM claim WHERE ClaimNumber = "752663830-x");
 
 -- Step 2
 -- Selecting all 'reserve' changes from users in San Francisco
