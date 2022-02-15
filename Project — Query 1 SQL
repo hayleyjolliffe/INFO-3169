@@ -22,3 +22,12 @@ SELECT claimant.ClaimantID, claimant.ClaimantTypeID, claimanttype.ClaimantTypeDe
 FROM claimant
 INNER JOIN claimanttype ON claimant.ClaimantTypeID = claimanttype.ClaimantTypeID
 WHERE claimant.ClaimantTypeID = 11;
+
+-- Step 4
+-- Returning claims from Claim entered by 'rkailyn' in 2016 or 2017
+-- RETURNS 15 RECORDS
+SELECT * FROM claim
+WHERE EnteredBy LIKE '%rkailyn%'
+AND EntryDate LIKE '%2016%'
+OR EnteredBy LIKE '%rkailyn%'
+AND EntryDate LIKE '%2017%';
