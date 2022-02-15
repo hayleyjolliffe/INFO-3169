@@ -6,3 +6,10 @@
 SELECT * FROM attachment
 WHERE FileName LIKE '%.pdf%'
 AND EnteredBy LIKE '%lnikki%';
+
+-- Step 2
+-- Finding all medical records in ReserveType
+-- RETURNS 6 RECORDS
+SELECT * FROM reservetype 
+WHERE ReserveTypeDesc LIKE '%Medical%'
+OR ParentID = 0;
