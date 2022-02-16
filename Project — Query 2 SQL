@@ -39,6 +39,10 @@ WHERE OldValue = "unassigned";
 -- Step 6
 -- Returning all closed claimants' full name and closed date
 -- RETURNS 66 RECORDS
+SELECT patient.FirstName, patient.LastName, claimant.ClosedDate
+FROM claimant
+INNER JOIN patient ON patient.PatientID = claimant.PatientID
+WHERE claimant.ClosedDate IS NOT NULL;
 
 -- Step 7
 -- Returning all claims created and updated by the same user
