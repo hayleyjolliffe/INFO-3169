@@ -24,6 +24,10 @@ WHERE ReserveID = "588785");
 -- Step 4
 -- Finding second highest reserve amount
 -- RETURNS 1 RECORD
+SELECT MAX(ReserveAmount)
+FROM reserve
+WHERE ReserveAmount NOT IN (SELECT MAX(ReserveAmount)
+FROM reserve);
 
 -- Step 5
 -- Return all claims initially 'unassigned'
