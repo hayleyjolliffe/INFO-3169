@@ -47,3 +47,6 @@ WHERE EnteredBy = UpdatedBy;
 -- Step 9
 -- Returning all published claims
 -- RETURNS 302 RECORDS
+SELECT *
+FROM ReservingTool
+WHERE IsPublished = "1";
