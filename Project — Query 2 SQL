@@ -46,6 +46,9 @@ WHERE EnteredBy = UpdatedBy;
 -- Step 8
 -- Finding claimants that haven't been reopened
 -- RETURNS 70 RECORDS
+SELECT *
+FROM claimant
+WHERE ReopenedDate IS NULL;
 
 -- Step 9
 -- Returning all published claims
