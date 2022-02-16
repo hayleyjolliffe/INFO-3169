@@ -9,8 +9,13 @@ INNER JOIN claimant ON patient.PatientID = claimant.PatientID
 WHERE claimant.ClaimID = (SELECT ClaimID FROM claim WHERE ClaimNumber = "752663830-x");
 
 -- Step 2
--- Selecting all 'reserve' changes from users in San Francisco
--- RETURNS 371 RECORDS
+-- Selecting all 'reserve' records changed by users in San Francisco
+-- RETURNS 371 RECORDS or 433 records idk yet
+SELECT *
+FROM reserve
+INNER JOIN users ON reserve.EnteredBy = users.UserName
+INNER JOIN office ON users.OfficeID = office.OfficeID
+WHERE office.OfficeDesc = 'San Francisco';
 
 -- Step 3
 -- Finding reserve amounts higher than Reserve 588785
