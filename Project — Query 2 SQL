@@ -28,6 +28,9 @@ WHERE ReserveID = "588785");
 -- Step 5
 -- Return all claims initially 'unassigned'
 -- RETURNS 100 RECORDS
+SELECT *
+FROM claimlog
+WHERE OldValue = "unassigned";
 
 -- Step 6
 -- Returning all closed claimants' full name and closed date
