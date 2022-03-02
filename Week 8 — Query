@@ -1,0 +1,58 @@
+--
+-- HAYLEY JOLLIFFE
+-- Week 8 Lab for INFO-3169
+--
+
+
+--
+-- Step 1: Update employee 206's phone number to 515.321.1818 in Employee
+-- and location ID to 1800 in Department
+--
+
+
+--
+-- Step 2: Update Jennifer Whalen's Department and Job IDs to 80
+-- and 'SA_REP' to Job History
+--
+
+
+--
+-- Step 3: Lock employees with READ table in Session 1, then try to
+-- insert a record into Session 2. Screenshot the result.
+-- Unlock the table and screenshot again.
+--
+
+
+--
+-- Step 4: Lock employees with WRITE table in Session 1, then try to
+-- select all records in Session 2. Screenshot the result.
+-- Unlock the table and screenshot again.
+--
+
+
+--
+-- Step 5: Write a COMMIT transaction
+-- 5A - Get max. Employee ID
+-- 5B - Insert a record in Employee with this ID
+-- 5C - Insert a record in Job History
+-- 5D - Commit
+--
+
+
+--
+-- Step 6: Write a ROLLBACK transaction
+-- 6A - Get max. Employee ID
+-- 6B - Insert a record in Employee with this ID
+-- 6C - Insert a record in Job History
+-- 6D - Rollback
+--
+
+
+--
+-- Step 7: Delete record created in Step 5 using JOIN
+--
+
+
+--
+-- Step 8: Delete record in Job History for Jennifer Whalen using SUBQUERY
+--
