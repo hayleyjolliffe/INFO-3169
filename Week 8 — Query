@@ -28,14 +28,20 @@ WHERE FIRST_NAME like 'Jennifer' AND LAST_NAME like 'Whalen');
 -- insert a record into Session 2. Screenshot the result.
 -- Unlock the table and screenshot again.
 --
-
+LOCK TABLES employees READ;
+UPDATE employees
+SET EMPLOYEE_ID=400
+WHERE EMPLOYEE_ID=200;
+UNLOCK TABLES;
 
 --
 -- Step 4: Lock employees with WRITE table in Session 1, then try to
 -- select all records in Session 2. Screenshot the result.
 -- Unlock the table and screenshot again.
 --
-
+LOCK TABLES employees WRITE;
+SELECT * FROM employees;
+UNLOCK TABLES;
 
 --
 -- Step 5: Write a COMMIT transaction
