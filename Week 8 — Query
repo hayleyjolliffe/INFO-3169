@@ -8,7 +8,11 @@
 -- Step 1: Update employee 206's phone number to 515.321.1818 in Employee
 -- and location ID to 1800 in Department
 --
-
+UPDATE employees
+INNER JOIN departments
+ON employees.DEPARTMENT_ID = departments.DEPARTMENT_ID
+SET employees.PHONE_NUMBER = "515.321.1818", departments.LOCATION_ID = 1800
+WHERE employee_ID = 206;
 
 --
 -- Step 2: Update Jennifer Whalen's Department and Job IDs to 80
