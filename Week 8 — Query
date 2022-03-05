@@ -13,7 +13,6 @@ INNER JOIN departments
 ON employees.DEPARTMENT_ID = departments.DEPARTMENT_ID
 SET employees.PHONE_NUMBER = "515.321.1818", departments.LOCATION_ID = 1800
 WHERE employee_ID = 206;
--- DONE, confirmed with Tina, DO NOT TOUCH
 
 --
 -- Step 2: Update Jennifer Whalen's Department and Job IDs to 80
@@ -23,7 +22,6 @@ UPDATE job_history
 SET DEPARTMENT_ID=80 ,JOB_ID='SA_REP'
 WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM employees
 WHERE FIRST_NAME like 'Jennifer' AND LAST_NAME like 'Whalen');
--- DONE, confirmed with Dan, DO NOT TOUCH
 
 --
 -- Step 3: Lock employees with READ table in Session 1, then try to
@@ -68,13 +66,13 @@ SELECT * FROM employees;
 -- 5C - Insert a record in Job History
 -- 5D - Commit
 --
-BEGIN TRANSACTION;
-UPDATE employees
-SET FIRST_NAME='Pickle'
-WHERE EMPLOYEE_ID=MAX(EMPLOYEE_ID);
-UPDATE job_history
-SET END_DATE='2038-01-19'
-WHERE EMPLOYEE_ID=MAX(EMPLOYEE_ID);
+START TRANSACTION;
+SELECT @employee_ID:=MAX(EMPLOYEE_ID)+1
+FROM employees;
+INSERT INTO employees(EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUE (@employee_ID, 'Pickle', 'Rick', 'PRICK', '515.099.7421', '1970-01-01', 'MK_MAN', 9999.00, 0.00, 201, 20);
+INSERT INTO job_history(EMPLOYEE_ID, START_DATE, END_DATE, JOB_ID, DEPARTMENT_ID)
+VALUES (@employee_ID, '1970-01-01', '2038-01-19', 'MK_MAN', 20);
 COMMIT;
 
 --
@@ -84,27 +82,29 @@ COMMIT;
 -- 6C - Insert a record in Job History
 -- 6D - Rollback
 --
-ALTER TABLE jobs_history ENGINE = InnoDB;
+ALTER TABLE job_history ENGINE = InnoDB;
 ALTER TABLE employees ENGINE = InnoDB;
-
-BEGIN TRANSACTION;
-INSERT INTO employees
-VALUES '500', 'Pickle', 'Rick', 'PRICK', '515.042.9876', '1970-01-01', 'MK_MAN', '13000.00', '99000.00', '0.00', '100', '20'
-WHERE EMPLOYEE_ID=MAX(EMPLOYEE_ID);
+START TRANSACTION;
+SELECT @employee_ID:=MAX(EMPLOYEE_ID)+1
+FROM employees;
+INSERT INTO employees(EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUE (@employee_ID, 'Pickle', 'Rick', 'PRICK', '515.099.7421', '1970-01-01', 'MK_MAN', 9999.00, 0.00, 201, 20);
+INSERT INTO job_history(EMPLOYEE_ID, START_DATE, END_DATE, JOB_ID, DEPARTMENT_ID)
+VALUES (@employee_ID, '1970-01-01', '2038-01-19', 'MK_MAN', 20);
 ROLLBACK;
 
 --
 -- Step 7: Delete record created in Step 5 using JOIN
 --
-DELETE FROM employees.FIRST_NAME, job_history.END_DATE
+DELETE * FROM employees.FIRST_NAME, job_history.END_DATE
 INNER JOIN job_history
 ON employees.EMPLOYEE_ID = job_history.EMPLOYEE_ID
-WHERE EMPLOYEE_ID=MAX(EMPLOYEE_ID);
+WHERE @employee_ID:=MAX(EMPLOYEE_ID);
 
 --
 -- Step 8: Delete record in Job History for Jennifer Whalen using SUBQUERY
 --
 DELETE FROM job_history
-WHERE (SELECT FROM employees
-WHERE first_name LIKE 'Jennifer'
-AND last_name LIKE 'Whalen');
+WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM employees
+WHERE FIRST_NAME='Jennifer'
+AND LAST_NAME='Whalen');
