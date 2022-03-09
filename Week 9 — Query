@@ -7,12 +7,16 @@ FROM employees;
 
 -- Step 2
 SELECT PHONE_NUMBER
+FROM employees
 REPLACE(str, find_string, replace_with);
-FROM employees;
 
 -- Step 3
+SELECT EMAIL
+FROM employees;
 
 -- Step 4
+SELECT PHONE_NUMBER
+FROM employees;
 
 -- Step 5
 
