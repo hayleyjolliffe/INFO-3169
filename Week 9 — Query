@@ -6,6 +6,9 @@ SELECT CONCAT(FIRST_NAME + SPACE(1) + LAST_NAME) AS 'Full Name'
 FROM employees;
 
 -- Step 2
+SELECT PHONE_NUMBER
+REPLACE(str, find_string, replace_with);
+FROM employees;
 
 -- Step 3
 
