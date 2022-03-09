@@ -2,6 +2,8 @@
 -- WEEK 9 LAB
 
 -- Step 1
+SELECT CONCAT(FIRST_NAME + SPACE(1) + LAST_NAME) AS 'Full Name'
+FROM employees;
 
 -- Step 2
 
