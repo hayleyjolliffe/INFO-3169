@@ -11,8 +11,8 @@ FROM employees
 REPLACE(str, find_string, replace_with);
 
 -- Step 3
-SELECT EMAIL
-FROM employees;
+UPDATE employees
+SET EMAIL = CONCAT(EMAIL, '@example.com');
 
 -- Step 4
 SELECT PHONE_NUMBER
