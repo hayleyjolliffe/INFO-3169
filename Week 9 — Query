@@ -15,7 +15,7 @@ UPDATE employees
 SET EMAIL = CONCAT(EMAIL, '@example.com');
 
 -- Step 4
-SELECT PHONE_NUMBER
+SELECT SUBSTRING(PHONE_NUMBER, -4) AS "Phone"
 FROM employees;
 
 -- Step 5
