@@ -4,6 +4,7 @@
 -- Step 1
 SELECT CONCAT(FIRST_NAME + SPACE(1) + LAST_NAME) AS 'Full Name'
 FROM employees;
+-- DONE, CHECKED WITH TINA
 
 -- Step 2
 UPDATE employees
@@ -18,15 +19,23 @@ SELECT SUBSTRING_INDEX(PHONE_NUMBER, -4) AS "Phone"
 FROM employees;
 
 -- Step 5
+SELECT * FROM locations
+WHERE LENGTH(street_address) <= (SELECT  MIN(LENGTH(street_address)) 
+FROM locations);
 
 -- Step 6
 SELECT job_id , COUNT(*)
 FROM employees
 GROUP BY job_id;
+-- DONE, CHECKED WITH EPHRAT
 
 -- Step 7
 
 -- Step 8
+START TRANSACTION;
+SELECT MIN(SALARY)
+FROM 
+COMMIT;
 
 -- Step 9
 START TRANSACTION;
