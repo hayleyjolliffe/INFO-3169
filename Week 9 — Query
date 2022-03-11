@@ -28,6 +28,9 @@ FROM employees
 GROUP BY job_id;
 
 -- Step 7
+SELECT DEPARTMENT_ID, SUM(SALARY) 
+FROM employees
+GROUP BY DEPARTMENT_ID;
 
 -- Step 8
 START TRANSACTION;
