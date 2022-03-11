@@ -32,3 +32,15 @@ GROUP BY job_id;
 -- Step 9
 
 -- Step 10
+START TRANSACTION;
+-- Finding highest salary
+SELECT MAX(SALARY) AS 'Highest Salary'
+FROM employees;
+-- Finding lowest salary
+SELECT MIN(SALARY) AS 'Lowest Salary'
+FROM employees;
+-- Finding average salary
+SELECT AVG(SALARY)
+FROM employees;
+GROUP BY DEPARTMENT_ID;
+COMMIT;
