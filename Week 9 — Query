@@ -4,7 +4,6 @@
 -- Step 1
 SELECT CONCAT(FIRST_NAME + SPACE(1) + LAST_NAME) AS 'Full Name'
 FROM employees;
--- DONE, CHECKED WITH TINA
 
 -- Step 2
 UPDATE employees
@@ -27,7 +26,6 @@ FROM locations);
 SELECT job_id , COUNT(*)
 FROM employees
 GROUP BY job_id;
--- DONE, CHECKED WITH EPHRAT
 
 -- Step 7
 
@@ -38,14 +36,9 @@ FROM
 COMMIT;
 
 -- Step 9
-START TRANSACTION;
-SELECT *
+SELECT AVG(SALARY), COUNT(*) 
 FROM employees
 WHERE DEPARTMENT_ID=90;
-SELECT AVG(SALARY)
-FROM employees
-WHERE DEPARTMENT_ID=90;
-COMMIT;
 
 -- Step 10
 START TRANSACTION;
