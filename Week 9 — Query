@@ -42,14 +42,7 @@ WHERE DEPARTMENT_ID=90;
 
 -- Step 10
 START TRANSACTION;
--- Finding highest salary
-SELECT MAX(SALARY) AS 'Highest Salary'
-FROM employees;
--- Finding lowest salary
-SELECT MIN(SALARY) AS 'Lowest Salary'
-FROM employees;
--- Finding average salary
-SELECT AVG(SALARY)
+SELECT MAX(SALARY) AS 'Highest Salary', MIN(SALARY) AS 'Lowest Salary', AVG(SALARY) AS 'Average Salary'
 FROM employees;
 GROUP BY DEPARTMENT_ID;
 COMMIT;
