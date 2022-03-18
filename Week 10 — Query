@@ -17,6 +17,15 @@ CALL getStep1();
 -- Step 02
 
 -- Step 03
+DELIMITER $$
+CREATE PROCEDURE getStep3()
+BEGIN
+SELECT * FROM employees;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS getStep3();
+-- Expected return: Drops 'getStep3()'
 
 -- Step 04
 
