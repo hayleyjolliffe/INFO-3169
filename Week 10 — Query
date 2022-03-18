@@ -63,6 +63,18 @@ DELIMITER ;
 CALL getStep5;
 
 -- Step 06
+DROP PROCEDURE IF EXISTS getStep6;
+
+DELIMITER $$
+CREATE PROCEDURE getStep6(OUT TotalQuantity, TotalUnitPrice)
+BEGIN
+SELECT TotalQuantity, TotalUnitPrice
+FROM orderdetails;
+END $$
+
+DELIMITER ;
+
+CALL getStep6;
 
 -- Step 07
 
