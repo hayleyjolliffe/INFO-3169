@@ -8,8 +8,8 @@ BEGIN
 SELECT OrderID, ProductID, UnitPrice, Quantity
 FROM orderdetails
 WHERE CustomerID = "VNET";
-END$$
-DELIMITER;
+END $$
+DELIMITER ;
 
 CALL getStep1();
 -- Expected return: 10 Records
