@@ -48,6 +48,19 @@ CALL getStep4('1');
 -- Expected return: Returns orders by EmployeeID
 
 -- Step 05
+DROP PROCEDURE IF EXISTS getStep5;
+
+DELIMITER $$
+CREATE PROCEDURE getStep5(IN GivenEmployee VARCHAR(50), OUT TotalOrders INT)
+BEGIN
+SELECT TotalOrders
+FROM orders
+GROUP BY(GivenEmployee);
+END $$
+
+DELIMITER ;
+
+CALL getStep5;
 
 -- Step 06
 
