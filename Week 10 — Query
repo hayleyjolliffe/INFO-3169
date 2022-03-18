@@ -28,6 +28,19 @@ DROP PROCEDURE IF EXISTS getStep3();
 -- Expected return: Drops 'getStep3()'
 
 -- Step 04
+DROP PROCEDURE IF EXISTS getStep4()
+
+DELIMITER $$
+CREATE PROCEDURE getStep4(IN WorkerID INT)
+BEGIN
+SELECT * FROM Orders
+WHERE EmployeeID = WorkerID;
+END $$
+
+DELIMITER ;
+
+CALL getStep4('1');
+-- Expected return: Returns orders by EmployeeID
 
 -- Step 05
 
