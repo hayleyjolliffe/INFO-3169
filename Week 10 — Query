@@ -15,6 +15,11 @@ CALL getStep1();
 -- Expected return: 10 Records
 
 -- Step 02
+DELIMITER $$
+CREATE PROCEDURE getStep2()
+BEGIN
+SELECT CustomerID, SUM(Quantity) AS TotalQuantity), SUM(UnitPrice) AS TotalUnitPrice
+FROM customer;
 
 -- Step 03
 DELIMITER $$
