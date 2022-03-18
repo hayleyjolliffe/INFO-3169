@@ -53,3 +53,16 @@ CALL getStep4('1');
 -- Step 09
 
 -- Step 10
+DROP PROCEDURE IF EXISTS getStep10;
+
+DELIMITER $$
+CREATE PROCEDURE IF getStep10(IN region10 VARCHAR(15), OUT customer_ID VARCHAR(5))
+BEGIN
+SELECT CustomerID
+FROM customers
+WHERE Region = region10;
+END $$
+DELIMITER ;
+
+CALL getStep10('SP', @customer_ID);
+SELECT @customer_ID;
