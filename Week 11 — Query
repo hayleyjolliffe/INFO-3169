@@ -23,6 +23,13 @@ WHERE SALARY > (SELECT SALARY
                 WHERE LAST_NAME = 'Russell');
 
 -- Step 3
+DROP VIEW IF EXISTS [Step 3];
+
+CREATE VIEW [Step 3] AS
+SELECT e1.FIRST_NAME, e1.LAST_NAME, e1.HIRE_DATE
+FROM employees e1
+JOIN employees e2 ON e2.LAST_NAME = 'Russell'
+WHERE e1.HIRE_DATE > e2.HIRE_DATE;
 
 -- Step 4
 
