@@ -57,6 +57,7 @@ FROM employees
 WHERE DEPARTMENT_ID = 50;
 
 -- Step 7
+SELECT LAST_DAY("2013-02-01");
 
 -- Step 8
 
