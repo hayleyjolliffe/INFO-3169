@@ -32,6 +32,12 @@ JOIN employees e2 ON e2.LAST_NAME = 'Russell'
 WHERE e1.HIRE_DATE > e2.HIRE_DATE;
 
 -- Step 4
+DROP VIEW IF EXISTS [Step 4];
+
+CREATE VIEW [Step 4] AS
+SELECT l.LOCATION_ID, l.STREET_ADDRESS, l.CITY, l.STATE_PROVINCE, c.COUNTRY_NAME
+FROM locations l
+JOIN countries c ON l.COUNTRY_ID = c.COUNTRY_ID;
 
 -- Step 5
 
