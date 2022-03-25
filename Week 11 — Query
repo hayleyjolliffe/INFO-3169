@@ -40,6 +40,12 @@ FROM locations l
 JOIN countries c ON l.COUNTRY_ID = c.COUNTRY_ID;
 
 -- Step 5
+DROP VIEW IF EXISTS [Step 5];
+
+CREATE VIEW [Step 5] AS
+SELECT SUM(SALARY) AS TOTAL_SALARY
+FROM employees
+GROUP BY DEPARTMENT_ID;
 
 -- Step 6
 
