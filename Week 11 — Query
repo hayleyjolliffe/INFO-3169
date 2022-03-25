@@ -13,6 +13,14 @@ WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
                         OR DEPARTMENT_NAME = 'Sales');
 
 -- Step 2
+DROP VIEW IF EXISTS [Step 2];
+
+CREATE VIEW [Step 2] AS
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM employees
+WHERE SALARY > (SELECT SALARY
+                FROM employees
+                WHERE LAST_NAME = 'Russell');
 
 -- Step 3
 
