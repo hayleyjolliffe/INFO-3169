@@ -2,65 +2,77 @@
 -- Week 10
 
 -- Step 01
+DROP PROCEDURE IF EXISTS getStep1();
+
 DELIMITER $$
 CREATE PROCEDURE getStep1()
 BEGIN
 SELECT OrderID, ProductID, UnitPrice, Quantity
 FROM orderdetails
-WHERE CustomerID = "VNET";
+WHERE CustomerID="VNET";
 END $$
+
 DELIMITER ;
 
 CALL getStep1();
--- Expected return: 10 Records
 
 -- Step 02
+DROP PROCEDURE IF EXISTS getStep2();
+
 DELIMITER $$
 CREATE PROCEDURE getStep2()
 BEGIN
-SELECT CustomerID, SUM(Quantity) AS TotalQuantity), SUM(UnitPrice) AS TotalUnitPrice
-FROM customer;
+SELECT CustomerID, SUM(Quantity) AS TotalQuantity, SUM(UnitPrice) AS TotalUnitPrice
+FROM Customers;
+END $$
+
+DELMITER ;
+
+CALL getStep2();
 
 -- Step 03
+DROP PROCEDURE IF EXISTS getStep3();
+
 DELIMITER $$
 CREATE PROCEDURE getStep3()
 BEGIN
-SELECT * FROM employees;
+SELECT *
+FROM Employees;
 END $$
+
 DELIMITER ;
 
 DROP PROCEDURE IF EXISTS getStep3();
--- Expected return: Drops 'getStep3()'
 
 -- Step 04
-DROP PROCEDURE IF EXISTS getStep4()
+DROP PROCEDURE IF EXISTS getStep4();
 
 DELIMITER $$
-CREATE PROCEDURE getStep4(IN WorkerID INT)
+CREATE PROCEDURE getStep4(IN WorkerID INT);
 BEGIN
-SELECT * FROM Orders
+SELECT *
+FROM Orders
 WHERE EmployeeID = WorkerID;
 END $$
 
 DELIMITER ;
 
 CALL getStep4('1');
--- Expected return: Returns orders by EmployeeID
 
 -- Step 05
-DROP PROCEDURE IF EXISTS getStep5;
+DROP PROCEDURE IF EXISTS getStep5();
 
 DELIMITER $$
 CREATE PROCEDURE getStep5(IN GivenEmployee VARCHAR(50), OUT TotalOrders INT)
 BEGIN
 SELECT TotalOrders
-FROM orders
-GROUP BY(GivenEmployee);
+FROM Orders
+GROUP BY GivenEmployee;
 END $$
 
 DELIMITER ;
 
-CALL getStep5;
+CALL getStep5();
 
 -- Step 06
 DROP PROCEDURE IF EXISTS getStep6;
@@ -69,7 +81,7 @@ DELIMITER $$
 CREATE PROCEDURE getStep6(OUT TotalQuantity, TotalUnitPrice)
 BEGIN
 SELECT TotalQuantity, TotalUnitPrice
-FROM orderdetails;
+FROM OrderDetails;
 END $$
 
 DELIMITER ;
@@ -77,10 +89,47 @@ DELIMITER ;
 CALL getStep6;
 
 -- Step 07
+DROP PROCEDURE IF EXISTS getStep7;
+
+DELIMITER $$
+CREATE PROCEDURE getStep7(INOUT Multiplier=5)
+BEGIN
+SELECT (TotalQuantity * Multiplier) AS MultipliedQuantity
+FROM OrderDetails;
+END $$
+
+DELIMITER ;
+
+CALL getStep7();
 
 -- Step 08
+DROP PROCEDURE IF EXISTS getStep8();
+
+DELIMITER $$
+CREATE PROCEDURE getStep8(INOUT Multiplier=5)
+BEGIN
+SELECT (TotalUnitPrice * Multiplier) AS MultipliedPrice
+FROM OrderDetails;
+END $$
+
+DELIMITER ;
+
+CALL getStep8();
 
 -- Step 09
+DROP PROCEDURE IF EXISTS getStep9();
+
+DELIMITER $$
+CREATE PROCEDURE getStep9()
+BEGIN
+SELECT Region, GROUP_CONCAT(CustomerID)
+FROM Customers
+GROUP BY Region;
+END $$
+
+DELIMITER ;
+
+CALL getStep9();
 
 -- Step 10
 DROP PROCEDURE IF EXISTS getStep10;
