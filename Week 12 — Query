@@ -110,3 +110,30 @@ END $$
 DELIMITER;
 
 -- Step 05
+DROP TRIGGER IF EXISTS northwind_w12.monitor_deletion;
+
+DELIMITER $$
+
+-- Set log table
+CREATE TABLE IF NOT EXISTS log_monitor_deletion (
+    `OrderID` = INT NOT NULL,
+    `UpdateDate` = TIME,
+    `ActionType` = VARCHAR(40)
+);
+
+-- Start trigger
+CREATE TRIGGER monitor_deletion
+AFTER DELETE
+ON Orders FOR EACH ROW
+BEGIN
+DECLARE MESSAGE_TEXT VARCHAR(60);
+IF OLD.OrderID IS NOT NULL
+THEN
+INSERT INTO log_monitor_deletion(OrderID, UpdateDate, ActionType)
+VALUES (OLD.OrderID, NOW(), 'Delete');
+SET MESSAGE_TEXT = CONCAT('Order Number: ', CONVERT(OLD.OrderID, CHAR), ' was deleted from the Orders table.');
+END IF;
+
+END $$
+
+DELIMITER ;
