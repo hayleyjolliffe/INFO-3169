@@ -62,6 +62,35 @@ END $$
 DELIMITER ;
 
 -- Step 03
+DROP TRIGGER IF EXISTS northwind_w12.update_orders
+
+DELIMITER $$
+
+-- Set log table
+CREATE TABLE IF NOT EXISTS log_update_orders (
+    `OrderID` = INT NOT NULL,
+    `Total` = INT NOT NULL,
+    `OrderTime` = VARCHAR(40),
+    `ActionType` = VARCHAR(40)
+);
+
+-- Start trigger
+CREATE TRIGGER update_orders
+AFTER INSERT
+ON OrderDetails FOR EACH ROW
+IF (Quantity * UnitPrice => 5000)
+THEN
+UPDATE log_update_orders
+SET
+OrderID = NEW.OrderID,
+Total = (NEW.Quantity * NEW.UnitPrice),
+OrderTime = NOW();
+ActionType = 'Update';
+END IF;
+
+END $$
+
+DELIMITER ;
 
 -- Step 04
 
