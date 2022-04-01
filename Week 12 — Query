@@ -34,6 +34,8 @@ END $$
 
 DELIMITER ;
 
+
+
 -- Step 02
 DROP TRIGGER IF EXISTS northwind_w12.update_shippers;
 
@@ -59,6 +61,8 @@ END IF;
 END $$
 
 DELIMITER ;
+
+
 
 -- Step 03
 DROP TRIGGER IF EXISTS northwind_w12.update_orders
@@ -87,6 +91,8 @@ END $$
 
 DELIMITER ;
 
+
+
 -- Step 04
 DROP TRIGGER IF EXISTS northwind_w12.order_error;
 
@@ -108,6 +114,8 @@ END IF;
 END $$
 
 DELIMITER;
+
+
 
 -- Step 05
 DROP TRIGGER IF EXISTS northwind_w12.monitor_deletion;
