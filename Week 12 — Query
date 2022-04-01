@@ -1,10 +1,24 @@
 -- HAYLEY JOLLIFFE
 -- Week 12
 
+USE northwind_w12
+
 -- Step 01
-DROP TRIGGER IF EXISTS hr_w12.monitor_shippers;
+DROP TRIGGER IF EXISTS northwind_w12.monitor_shippers;
+
+DELIMITER $$
 
 CREATE TRIGGER monitor_shippers
+AFTER UPDATE
+ON Shippers FOR EACH ROW
+SET action = 'update',
+ShipperID = NEW.ShipperID,
+ShipperName = NEW.ShipperName,
+ShipperPhone = NEW.ShipperPhone,
+UpdateDate = NOW();
+END $$
+
+DELIMITER ;
 
 -- Step 02
 
