@@ -1,51 +1,40 @@
 -- HAYLEY JOLLIFFE
 -- Week 12
 
-USE northwind_w12
+USE northwind_w12;
 
 -- Step 01
-DROP TRIGGER IF EXISTS northwind_w12.monitor_shippers;
-
-DELIMITER $$
-
--- Set log table
-CREATE TABLE IF NOT EXISTS log_monitor_shippers (
-    `ShipperID` INT NOT NULL,
-    `CompanyName` VARCHAR(40) NOT NULL,
-    `Phone` VARCHAR(24) DEFAULT NULL,
-    `UpdateDate` = TIME,
-    `ActionType` = VARCHAR(40)
+CREATE TABLE IF NOT EXISTS log_shippers (
+    RecordID INT AUTO_INCREMENT PRIMARY KEY,
+    CompanyName VARCHAR(50) NOT NULL,
+    Phone VARCHAR(50) NOT NULL,
+    UpdateDate DATETIME DEFAULT NULL,
+    ActionType VARCHAR(50) DEFAULT NULL
 );
 
--- Start trigger
+DROP TRIGGER IF EXISTS monitor_shippers;
+
 CREATE TRIGGER monitor_shippers
 AFTER UPDATE
 ON Shippers FOR EACH ROW
-SET
-ShipperID = NEW.ShipperID,
+INSERT INTO monitor_shippers
+SET ActionType = 'Update',
 CompanyName = NEW.CompanyName,
 Phone = NEW.Phone,
 UpdateDate = NOW();
-ActionType = 'Update';
-INSERT INTO log_monitor_shippers(ShipperID, CompanyName, Phone, UpdateDate, ActionType)
-VALUES (NEW.ShipperID, NEW.CompanyName, NEW.Phone, NEW.UpdateDate, ActionType);
-
-END $$
-
-DELIMITER ;
 
 
 
 -- Step 02
 DROP TRIGGER IF EXISTS northwind_w12.update_shippers;
 
-DELIMITER $$
-
 -- Set log table
 CREATE TABLE IF NOT EXISTS log_update_shippers (
-    `CompanyName` VARCHAR(40) NOT NULL,
-    `Phone` VARCHAR(24) DEFAULT NULL;
+    CompanyName VARCHAR(40) NOT NULL,
+    Phone VARCHAR(24) DEFAULT NULL
 );
+
+DELIMITER $$
 
 -- Start trigger
 CREATE TRIGGER update_shippers
@@ -65,23 +54,24 @@ DELIMITER ;
 
 
 -- Step 03
-DROP TRIGGER IF EXISTS northwind_w12.update_orders
-
-DELIMITER $$
+DROP TRIGGER IF EXISTS northwind_w12.update_orders;
 
 -- Set log table
 CREATE TABLE IF NOT EXISTS log_update_orders (
-    `OrderID` = INT NOT NULL,
-    `Total` = INT NOT NULL,
-    `OrderTime` = VARCHAR(40),
-    `ActionType` = VARCHAR(40)
+    OrderID INT NOT NULL,
+    Total INT NOT NULL,
+    OrderTime VARCHAR(40),
+    ActionType VARCHAR(40)
 );
+
+DELIMITER $$
 
 -- Start trigger
 CREATE TRIGGER update_orders
 AFTER INSERT
 ON OrderDetails FOR EACH ROW
-IF (NEW.Quantity * NEW.UnitPrice => 5000)
+BEGIN
+IF NEW.Quantity * NEW.UnitPrice > 5000
 THEN
 INSERT INTO log_update_orders(OrderID, Total, OrderTime, ActionType)
 VALUES (NEW.OrderID, (NEW.Quantity * NEW.UnitPrice), NOW(), 'Update');
@@ -102,9 +92,11 @@ DELIMITER $$
 CREATE TRIGGER order_error
 AFTER INSERT
 ON OrderDetails FOR EACH ROW
-IF ( (NEW.Quantity IS NULL) OR (NEW.UnitPrice IS NULL) )
+BEGIN
+DECLARE MESSAGE_TEXT VARCHAR(60);
+IF ((NEW.Quantity IS NULL) OR (NEW.UnitPrice IS NULL))
 THEN
-SIGNAL SQLSTATE '4500'
+SIGNAL SQLSTATE '45000';
 SET MESSAGE_TEXT = "Error: Quantity multiplied by unit price should not be null.";
 ELSE
 INSERT INTO log_update_orders(OrderID, Total, OrderTime, ActionType)
@@ -113,21 +105,21 @@ END IF;
 
 END $$
 
-DELIMITER;
+DELIMITER ;
 
 
 
 -- Step 05
 DROP TRIGGER IF EXISTS northwind_w12.monitor_deletion;
 
-DELIMITER $$
-
 -- Set log table
 CREATE TABLE IF NOT EXISTS log_monitor_deletion (
-    `OrderID` = INT NOT NULL,
-    `UpdateDate` = TIME,
-    `ActionType` = VARCHAR(40)
+    OrderID INT NOT NULL,
+    UpdateDate TIME,
+    ActionType VARCHAR(40)
 );
+
+DELIMITER $$
 
 -- Start trigger
 CREATE TRIGGER monitor_deletion
