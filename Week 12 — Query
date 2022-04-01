@@ -8,14 +8,26 @@ DROP TRIGGER IF EXISTS northwind_w12.monitor_shippers;
 
 DELIMITER $$
 
+-- Set log table
+CREATE TABLE IF NOT EXISTS log_monitor_shippers (
+    `ShipperID` INT NOT NULL,
+    `CompanyName` VARCHAR(40) NOT NULL,
+    `Phone` VARCHAR(24) DEFAULT NULL,
+    `UpdateDate` = NOW();
+);
+
+-- Start trigger
 CREATE TRIGGER monitor_shippers
 AFTER UPDATE
 ON Shippers FOR EACH ROW
 SET action = 'update',
 ShipperID = NEW.ShipperID,
-ShipperName = NEW.ShipperName,
-ShipperPhone = NEW.ShipperPhone,
+CompanyName = NEW.CompanyName,
+Phone = NEW.Phone,
 UpdateDate = NOW();
+INSERT INTO log_monitor_shippers(ShipperID, CompanyName, Phone, UpdateDate)
+VALUES (NEW.ShipperID, NEW.CompanyName, NEW.Phone, NEW.UpdateDate);
+
 END $$
 
 DELIMITER ;
