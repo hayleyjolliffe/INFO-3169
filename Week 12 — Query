@@ -35,6 +35,31 @@ END $$
 DELIMITER ;
 
 -- Step 02
+DROP TRIGGER IF EXISTS northwind_w12.update_shippers;
+
+DELIMITER $$
+
+-- Set log table
+CREATE TABLE IF NOT EXISTS log_update_shippers (
+    `CompanyName` VARCHAR(40) NOT NULL,
+    `Phone` VARCHAR(24) DEFAULT NULL;
+);
+
+CREATE TRIGGER update_shippers
+AFTER UPDATE
+ON Shippers FOR EACH ROW
+BEGIN
+IF NEW.CompanyName <=> OLD.CompanyName
+THEN
+UPDATE log_update_shippers
+SET
+CompanyName = NEW.CompanyName,
+Phone = NEW.Phone;
+END IF;
+
+END $$
+
+DELIMITER ;
 
 -- Step 03
 
