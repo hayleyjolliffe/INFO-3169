@@ -77,14 +77,10 @@ CREATE TABLE IF NOT EXISTS log_update_orders (
 CREATE TRIGGER update_orders
 AFTER INSERT
 ON OrderDetails FOR EACH ROW
-IF (Quantity * UnitPrice => 5000)
+IF (NEW.Quantity * NEW.UnitPrice => 5000)
 THEN
-UPDATE log_update_orders
-SET
-OrderID = NEW.OrderID,
-Total = (NEW.Quantity * NEW.UnitPrice),
-OrderTime = NOW();
-ActionType = 'Update';
+INSERT INTO log_update_orders(OrderID, Total, OrderTime, ActionType)
+VALUES (NEW.OrderID, (NEW.Quantity * NEW.UnitPrice), NOW(), 'Update');
 END IF;
 
 END $$
