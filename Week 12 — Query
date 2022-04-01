@@ -45,16 +45,15 @@ CREATE TABLE IF NOT EXISTS log_update_shippers (
     `Phone` VARCHAR(24) DEFAULT NULL;
 );
 
+-- Start trigger
 CREATE TRIGGER update_shippers
 AFTER UPDATE
 ON Shippers FOR EACH ROW
 BEGIN
 IF NEW.CompanyName <=> OLD.CompanyName
 THEN
-UPDATE log_update_shippers
-SET
-CompanyName = NEW.CompanyName,
-Phone = NEW.Phone;
+INSERT INTO log_update_shippers(CompanyName, Phone)
+VALUES (NEW.CompanyName, NEW.Phone);
 END IF;
 
 END $$
