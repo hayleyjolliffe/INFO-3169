@@ -88,5 +88,25 @@ END $$
 DELIMITER ;
 
 -- Step 04
+DROP TRIGGER IF EXISTS northwind_w12.order_error;
+
+DELIMITER $$
+
+-- No table, start trigger
+CREATE TRIGGER order_error
+AFTER INSERT
+ON OrderDetails FOR EACH ROW
+IF ( (NEW.Quantity IS NULL) OR (NEW.UnitPrice IS NULL) )
+THEN
+SIGNAL SQLSTATE '4500'
+SET MESSAGE_TEXT = "Error: Quantity multiplied by unit price should not be null.";
+ELSE
+INSERT INTO log_update_orders(OrderID, Total, OrderTime, ActionType)
+VALUES (NEW.OrderId, (NEW.Quantity * NEW.UnitPrice), NOW(), 'Update');
+END IF;
+
+END $$
+
+DELIMITER;
 
 -- Step 05
