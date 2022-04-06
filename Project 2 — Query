@@ -10,6 +10,9 @@ GROUP BY CategoryID DESC;
 
 -- STEP 2
 -- Expected return: 70 rows
+SELECT City, COUNT(*)
+FROM Customers
+GROUP BY City ASC;
 
 -- STEP 3
 -- Expected return: 18 rows
