@@ -4,7 +4,9 @@
 
 -- STEP 1
 -- Expected return: 8 rows
-
+SELECT CategoryID, COUNT(*)
+FROM Products
+GROUP BY CategoryID DESC;
 
 -- STEP 2
 -- Expected return: 70 rows
