@@ -55,6 +55,11 @@ ORDER BY CustomerName ASC;
 
 -- STEP 9
 -- Expected return: 26 rows
+SELECT Products.ProductName, Products.UnitPrice, Products.Region
+FROM Products
+INNER JOIN Suppliers
+ON Products.SupplierID = Suppliers.SupplierID
+WHERE Suppliers.Country NOT IN 'USA';
 
 -- STEP 10
 -- Expected return: 63 rows
