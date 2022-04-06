@@ -1,0 +1,39 @@
+-- HAYLEY JOLLIFFE
+-- Project 2
+-- Uses NORTHWIND
+
+-- STEP 1
+-- Expected return: 8 rows
+
+
+-- STEP 2
+-- Expected return: 70 rows
+
+-- STEP 3
+-- Expected return: 18 rows
+
+-- STEP 4
+-- Expected return: 2 rows
+
+-- STEP 5
+-- Expected return: 93 rows
+SELECT *
+FROM Customers
+WHERE Region IS NOT NULL
+GROUP BY Region ASC
+AND
+ORDER BY CustomerID ASC;
+
+-- STEP 6
+-- Expected return: 4 rows
+
+-- STEP 7
+-- Expected return: 18 rows
+
+-- STEP 8
+
+-- STEP 9
+-- Expected return: 26 rows
+
+-- STEP 10
+-- Expected return: 63 rows
