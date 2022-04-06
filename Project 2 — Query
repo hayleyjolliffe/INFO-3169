@@ -45,6 +45,11 @@ ORDER BY CustomerID ASC;
 
 -- STEP 7
 -- Expected return: 18 rows
+SELECT CustomerName
+FROM Orders.C1
+WHERE EmployeeName NOT IN (SELECT EmployeeName
+    FROM Orders.C2 WHERE EmployeeID = 4)
+ORDER BY CustomerName ASC;
 
 -- STEP 8
 
