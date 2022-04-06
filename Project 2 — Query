@@ -16,6 +16,9 @@ GROUP BY City ASC;
 
 -- STEP 3
 -- Expected return: 18 rows
+SELECT * IF(UnitsInStock > ReorderLevel)
+FROM Products
+ORDER BY ProductID ASC;
 
 -- STEP 4
 -- Expected return: 2 rows
