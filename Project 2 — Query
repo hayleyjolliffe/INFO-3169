@@ -22,6 +22,9 @@ ORDER BY ProductID ASC;
 
 -- STEP 4
 -- Expected return: 2 rows
+SELECT * IF(SUM(UnitsInStock + UnitsOnOrder) <= ReorderLevel AND Discontinued=0)
+FROM Products
+ORDER BY ProductID ASC;
 
 -- STEP 5
 -- Expected return: 93 rows
