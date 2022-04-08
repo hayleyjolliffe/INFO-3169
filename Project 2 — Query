@@ -1,6 +1,5 @@
 -- HAYLEY JOLLIFFE
 -- Project 2
--- Uses NORTHWIND
 
 -- STEP 1
 -- Expected return: 8 rows
@@ -16,14 +15,16 @@ GROUP BY City ASC;
 
 -- STEP 3
 -- Expected return: 18 rows
-SELECT * IF(UnitsInStock > ReorderLevel)
+SELECT *
 FROM Products
+WHERE (UnitsInStock > ReorderLevel)
 ORDER BY ProductID ASC;
 
 -- STEP 4
 -- Expected return: 2 rows
-SELECT * IF(SUM(UnitsInStock + UnitsOnOrder) <= ReorderLevel AND Discontinued=0)
+SELECT *
 FROM Products
+WHERE (SUM(UnitsInStock + UnitsOnOrder) <= ReorderLevel AND Discontinued=0)
 ORDER BY ProductID ASC;
 
 -- STEP 5
@@ -32,7 +33,6 @@ SELECT *
 FROM Customers
 WHERE Region IS NOT NULL
 GROUP BY Region ASC
-AND
 ORDER BY CustomerID ASC;
 
 -- STEP 6
@@ -52,6 +52,16 @@ WHERE EmployeeName NOT IN (SELECT EmployeeName
 ORDER BY CustomerName ASC;
 
 -- STEP 8
+DROP VIEW IF EXISTS CustomerInfo;
+-- (ViewStep8)
+
+CREATE VIEW CustomerInfo(OUT Customers)
+SELECT Customers.CustomerID, Customers.CompanyName, Customers.ContactName, 
+Customers.ContactTitle, Customers.City, Customers.Country, Customer.Phone,
+Orders.OrderDate, Orders.RequiredDate, Orders.ShippedDate
+FROM Customers
+INNER JOIN Orders ON Orders.CustomerID = Customers.CustomerID;
+
 
 -- STEP 9
 -- Expected return: 26 rows
@@ -59,7 +69,17 @@ SELECT Products.ProductName, Products.UnitPrice, Products.Region
 FROM Products
 INNER JOIN Suppliers
 ON Products.SupplierID = Suppliers.SupplierID
-WHERE Suppliers.Country NOT IN 'USA';
+WHERE Suppliers.Country NOT LIKE 'USA';
 
 -- STEP 10
 -- Expected return: 63 rows
+DROP VIEW IF EXISTS Report200;
+-- (ViewStep10)
+
+CREATE VIEW Report200()
+SELECT CustomerID, SUM(Orders.Freight)
+FROM Orders
+HAVING SUM(Orders.Freight) > 200
+GROUP BY CustomerID);
+
+CALL Report200;
