@@ -62,7 +62,7 @@ Orders.OrderDate, Orders.RequiredDate, Orders.ShippedDate
 FROM Customers
 INNER JOIN Orders ON Orders.CustomerID = Customers.CustomerID;
 
-CALL CustomerInfo;
+SELECT * FROM CustomerInfo;
 
 
 -- STEP 9
@@ -84,4 +84,4 @@ FROM Orders
 HAVING SUM(Orders.Freight) > 200
 GROUP BY CustomerID);
 
-CALL Report200;
+SELECT * FROM Report200;
