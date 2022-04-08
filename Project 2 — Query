@@ -3,15 +3,34 @@
 
 -- STEP 1
 -- Expected return: 8 rows
+SELECT ProductName, COUNT(CategoryID)
+FROM Products
+GROUP BY CategoryID DESC;
+-- PROGRESS
+
+
 SELECT COUNT(CategoryID)
 FROM Products
 GROUP BY CategoryID DESC;
 
 -- STEP 2
 -- Expected return: 70 rows
-SELECT COUNT(City)
-FROM Customers
-GROUP BY City ASC;
+SELECT DISTINCT c.country, a.TotalCustomersCity, c.city, b.TotalCustomersCountry
+FROM Customers AS c
+LEFT JOIN 
+(SELECT c2.Country, COUNT(c2.CustomerID) AS TotalCustomersCountry
+FROM Customers c2
+GROUP BY c2.Country) B 
+ON c.Country = B.Country
+LEFT JOIN 
+(SELECT c1.Country, c1.City, COUNT(c1.CustomerID) AS TotalCustomersCity
+FROM Customers c1
+GROUP BY c1.Country, c1.City
+ORDER BY  COUNT(c1.CustomerID)) a 
+ON c.City = a.City AND c.Country = a.Country
+
+ORDER BY c.Country, c.City;
+-- LORGKROQ TESTED, DO NOT TOUCH
 
 -- STEP 3
 -- Expected return: 18 rows
