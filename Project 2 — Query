@@ -3,13 +3,13 @@
 
 -- STEP 1
 -- Expected return: 8 rows
-SELECT CategoryID, COUNT(*)
+SELECT NumberOfProducts AS COUNT(CategoryID)
 FROM Products
 GROUP BY CategoryID DESC;
 
 -- STEP 2
 -- Expected return: 70 rows
-SELECT City, COUNT(*)
+SELECT PerCity AS COUNT(City)
 FROM Customers
 GROUP BY City ASC;
 
@@ -55,12 +55,14 @@ ORDER BY CustomerName ASC;
 DROP VIEW IF EXISTS CustomerInfo;
 -- (ViewStep8)
 
-CREATE VIEW CustomerInfo(OUT Customers)
+CREATE VIEW CustomerInfo AS
 SELECT Customers.CustomerID, Customers.CompanyName, Customers.ContactName, 
 Customers.ContactTitle, Customers.City, Customers.Country, Customer.Phone,
 Orders.OrderDate, Orders.RequiredDate, Orders.ShippedDate
 FROM Customers
 INNER JOIN Orders ON Orders.CustomerID = Customers.CustomerID;
+
+CALL CustomerInfo;
 
 
 -- STEP 9
@@ -76,7 +78,7 @@ WHERE Suppliers.Country NOT LIKE 'USA';
 DROP VIEW IF EXISTS Report200;
 -- (ViewStep10)
 
-CREATE VIEW Report200()
+CREATE VIEW Report200 AS
 SELECT CustomerID, SUM(Orders.Freight)
 FROM Orders
 HAVING SUM(Orders.Freight) > 200
