@@ -3,13 +3,13 @@
 
 -- STEP 1
 -- Expected return: 8 rows
-SELECT NumberOfProducts AS COUNT(CategoryID)
+SELECT COUNT(CategoryID)
 FROM Products
 GROUP BY CategoryID DESC;
 
 -- STEP 2
 -- Expected return: 70 rows
-SELECT PerCity AS COUNT(City)
+SELECT COUNT(City)
 FROM Customers
 GROUP BY City ASC;
 
@@ -23,9 +23,10 @@ ORDER BY ProductID ASC;
 
 -- STEP 4
 -- Expected return: 2 rows
-SELECT *
+SELECT SUM(UnitsInStock + UnitsOnOrder)
 FROM Products
-WHERE (SUM(UnitsInStock + UnitsOnOrder) <= ReorderLevel AND Discontinued=0)
+WHERE SUM(UnitsInStock + UnitsOnOrder) <= ReorderLevel
+AND Discontinued=0
 ORDER BY ProductID ASC;
 
 -- STEP 5
@@ -33,20 +34,21 @@ ORDER BY ProductID ASC;
 SELECT *
 FROM Customers
 WHERE Region IS NOT NULL
-GROUP BY Region ASC
+GROUP BY Region
 ORDER BY CustomerID ASC;
+-- TESTED, DO NOT CHANGE
 
 -- STEP 6
 -- Expected return: 4 rows
-SELECT CompanyName, CustomerID
-FROM Orders.C1
+SELECT Orders.CompanyName, Orders.CustomerID
+FROM Orders C1
 WHERE CustomerID NOT IN (SELECT CustomerID
-    FROM Orders.C2)
+    FROM Orders C2)
 ORDER BY CustomerID ASC;
 
 -- STEP 7
 -- Expected return: 18 rows
-SELECT CustomerName
+SELECT Orders.CustomerName
 FROM Orders.C1
 WHERE EmployeeName NOT IN (SELECT EmployeeName
     FROM Orders.C2 WHERE EmployeeID = 4)
@@ -65,7 +67,6 @@ INNER JOIN Orders ON Orders.CustomerID = Customers.CustomerID;
 
 SELECT * FROM CustomerInfo;
 -- TESTED, DO NOT CHANGE
-
 
 -- STEP 9
 -- Expected return: 26 rows
