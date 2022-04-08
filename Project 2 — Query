@@ -19,6 +19,7 @@ SELECT *
 FROM Products
 WHERE (UnitsInStock > ReorderLevel)
 ORDER BY ProductID ASC;
+-- TESTED, DO NOT CHANGE
 
 -- STEP 4
 -- Expected return: 2 rows
@@ -57,21 +58,23 @@ DROP VIEW IF EXISTS CustomerInfo;
 
 CREATE VIEW CustomerInfo AS
 SELECT Customers.CustomerID, Customers.CompanyName, Customers.ContactName, 
-Customers.ContactTitle, Customers.City, Customers.Country, Customer.Phone,
+Customers.ContactTitle, Customers.City, Customers.Country, Customers.Phone,
 Orders.OrderDate, Orders.RequiredDate, Orders.ShippedDate
 FROM Customers
 INNER JOIN Orders ON Orders.CustomerID = Customers.CustomerID;
 
 SELECT * FROM CustomerInfo;
+-- TESTED, DO NOT CHANGE
 
 
 -- STEP 9
 -- Expected return: 26 rows
-SELECT Products.ProductName, Products.UnitPrice, Products.Region
+SELECT Products.ProductName, Products.UnitPrice, Suppliers.Region
 FROM Products
 INNER JOIN Suppliers
 ON Products.SupplierID = Suppliers.SupplierID
 WHERE Suppliers.Country NOT LIKE 'USA';
+-- TESTED, DO NOT CHANGE
 
 -- STEP 10
 -- Expected return: 63 rows
@@ -81,7 +84,8 @@ DROP VIEW IF EXISTS Report200;
 CREATE VIEW Report200 AS
 SELECT CustomerID, SUM(Orders.Freight)
 FROM Orders
-HAVING SUM(Orders.Freight) > 200
-GROUP BY CustomerID);
+GROUP BY CustomerID
+HAVING SUM(Orders.Freight) > 200;
 
 SELECT * FROM Report200;
+-- TESTED, DO NOT CHANGE
