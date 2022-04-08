@@ -3,17 +3,41 @@
 
 -- STEP 1
 -- Expected return: 8 rows
-SELECT ProductName, COUNT(CategoryID)
+SELECT CategoryName, COUNT(Products.CategoryID)
 FROM Products
-GROUP BY CategoryID DESC;
--- PROGRESS
+INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID
+GROUP BY Products.CategoryID
+ORDER BY COUNT(CategoryID) DESC;
+-- My version, TESTING
 
-SELECT COUNT(CategoryID)
-FROM Products
-GROUP BY CategoryID DESC;
+/*
+SELECT CategoryName, COUNT(products.categoryID)
+FROM products
+INNER JOIN  categories
+ON products.CategoryID = categories.CategoryID
+GROUP BY products.categoryID
+ORDER BY COUNT(categoryID) DESC;
+-- LORGKROQ TESTED, DO NOT TOUCH
+*/
 
 -- STEP 2
 -- Expected return: 70 rows
+SELECT DISTINCT c.Country, b.TotalCountry, c.City, a.TotalCity
+FROM Customers AS c
+LEFT JOIN (
+    SELECT cc.Country, COUNT(cc.CustomerID) AS TotalCountry
+    FROM Customers cc
+    GROUP BY cc.Country) b
+    ON c.Country = b.Country
+LEFT JOIN (
+    SELECT ccc.Country, ccc.City, COUNT(ccc.CustomerID) AS TotalCity
+    FROM Customers ccc
+    GROUP BY ccc.Country, ccc.City
+    ORDER BY COUNT(ccc.CustomerID)) a
+    ON c.City = a.City
+    AND c.Country = a.Country
+
+
 SELECT DISTINCT c.country, a.TotalCustomersCity, c.city, b.TotalCustomersCountry
 FROM Customers AS c
 LEFT JOIN 
@@ -67,7 +91,7 @@ ORDER BY CustomerID ASC;
 -- STEP 7
 -- Expected return: 18 rows
 SELECT Orders.CustomerName
-FROM Orders.C1
+FROM Orders AS o
 WHERE EmployeeName NOT IN (SELECT EmployeeName
     FROM Orders.C2 WHERE EmployeeID = 4)
 ORDER BY CustomerName ASC;
