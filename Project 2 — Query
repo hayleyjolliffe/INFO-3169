@@ -8,7 +8,6 @@ FROM Products
 GROUP BY CategoryID DESC;
 -- PROGRESS
 
-
 SELECT COUNT(CategoryID)
 FROM Products
 GROUP BY CategoryID DESC;
@@ -42,11 +41,11 @@ ORDER BY ProductID ASC;
 
 -- STEP 4
 -- Expected return: 2 rows
-SELECT SUM(UnitsInStock + UnitsOnOrder)
-FROM Products
-WHERE SUM(UnitsInStock + UnitsOnOrder) <= ReorderLevel
-AND Discontinued=0
-ORDER BY ProductID ASC;
+SELECT ProductName, ProductID
+FROM products 
+WHERE UnitsInStock + UnitsOnOrder <= ReorderLevel AND  Discontinued = '0'
+ORDER BY ProductID;
+-- LORGKROQ TESTED, DO NOT TOUCH
 
 -- STEP 5
 -- Expected return: 93 rows
