@@ -36,8 +36,10 @@ LEFT JOIN (
     ORDER BY COUNT(ccc.CustomerID)) a
     ON c.City = a.City
     AND c.Country = a.Country
+ORDER BY c.Country, c.City;
+-- My version, TESTING
 
-
+/*
 SELECT DISTINCT c.country, a.TotalCustomersCity, c.city, b.TotalCustomersCountry
 FROM Customers AS c
 LEFT JOIN 
@@ -54,6 +56,7 @@ ON c.City = a.City AND c.Country = a.Country
 
 ORDER BY c.Country, c.City;
 -- LORGKROQ TESTED, DO NOT TOUCH
+*/
 
 -- STEP 3
 -- Expected return: 18 rows
@@ -66,10 +69,18 @@ ORDER BY ProductID ASC;
 -- STEP 4
 -- Expected return: 2 rows
 SELECT ProductName, ProductID
+FROM Products
+WHERE (UnitsInStock + UnitsOnOrder) <= ReorderLevel
+AND Discontinued = '0';
+-- My version, TESTING
+
+/*
+SELECT ProductName, ProductID
 FROM products 
 WHERE UnitsInStock + UnitsOnOrder <= ReorderLevel AND  Discontinued = '0'
 ORDER BY ProductID;
 -- LORGKROQ TESTED, DO NOT TOUCH
+*/
 
 -- STEP 5
 -- Expected return: 93 rows
@@ -82,19 +93,40 @@ ORDER BY CustomerID ASC;
 
 -- STEP 6
 -- Expected return: 4 rows
+SELECT o.CompanyName, o.CustomerID
+FROM Orders AS o
+WHERE o.CustomerID NOT IN (
+    SELECT oo.CustomerID
+    FROM Orders AS oo)
+ORDER BY CustomerID ASC;
+-- My version, TESTING
+
+/*
 SELECT Orders.CompanyName, Orders.CustomerID
 FROM Orders C1
 WHERE CustomerID NOT IN (SELECT CustomerID
     FROM Orders C2)
 ORDER BY CustomerID ASC;
+*/
 
 -- STEP 7
 -- Expected return: 18 rows
+SELECT o.CustomerName
+FROM Orders AS o
+WHERE oo.EmployeeID NOT IN (
+    SELECT oo.EmployeeName
+    FROM Orders AS oo
+    WHERE oo.EmployeeID = 4)
+ORDER BY o.CustomerName ASC;
+-- My version, TESTING
+
+/*
 SELECT Orders.CustomerName
 FROM Orders AS o
 WHERE EmployeeName NOT IN (SELECT EmployeeName
     FROM Orders.C2 WHERE EmployeeID = 4)
 ORDER BY CustomerName ASC;
+*/
 
 -- STEP 8
 DROP VIEW IF EXISTS CustomerInfo;
